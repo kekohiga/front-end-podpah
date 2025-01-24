@@ -1,0 +1,20 @@
+<main>
+    <section class="form-section">
+        <img src="/assets/svg/download.jpg"/>
+       <h2>{{ title }}</h2>
+       <ng-content></ng-content>
+       <div class="btn-wrapper">
+            <button
+                class="btn-primary"
+                (click)="submit()"
+                [disabled]="disablePrimaryBtn"
+            >
+                {{ primaryBtnText }}
+            </button>
+       </div>
+    </section>
+    <section class="main-section">
+        <h1>PODPAH</h1>
+        <img src="/assets/svg/logo-podpah-tst.webp"/>
+    </section>
+</main>
