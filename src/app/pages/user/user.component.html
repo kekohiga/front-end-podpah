@@ -1,1 +1,13 @@
-<p>Usuário autenticado</p>
+<div>
+  <h2>User List</h2>
+  <input [(ngModel)]="name" placeholder="Name" />
+  <input [(ngModel)]="description" placeholder="Description" />
+  <button (click)="addUser()">Add User</button>
+
+  <ul>
+    <li *ngFor="let user of users$ | async">
+      {{ user.name }} ({{ user.dayOfWeek }}) - {{ user.description }}
+      <button (click)="deleteUser(user.id)">Delete</button>
+    </li>
+  </ul>
+</div>
