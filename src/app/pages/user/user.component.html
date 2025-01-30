@@ -1,18 +1,18 @@
 <div class="container">
-  <h2>User List</h2>
+  <h2>Cadastro de convidados PODPAH</h2>
 
-  <input [(ngModel)]="name" placeholder="Name" />
-  <input [(ngModel)]="description" placeholder="Description" />
+  <input [(ngModel)]="name" placeholder="Nome" />
+  <input [(ngModel)]="description" placeholder="Assunto" />
 
   <button (click)="saveUser()">
-    {{ isEditing ? 'Save' : 'Add User' }}
+    {{ isEditing ? 'Salvar' : 'Adicionar convidado' }}
   </button>
 
   <ul>
     <li *ngFor="let user of users$ | async">
       {{ user.name }} ({{ user.dayOfWeek }}) - {{ user.description }}
-      <button (click)="editUser(user)">Edit</button>
-      <button (click)="deleteUser(user.id)">Delete</button>
+      <button (click)="editUser(user)">Editar</button>
+      <button (click)="deleteUser(user.id)">Deletar</button>
     </li>
   </ul>
 </div>

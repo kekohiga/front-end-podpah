@@ -1,34 +1,34 @@
 .container {
-  max-width: 800px; /* Aumentei ainda mais a largura máxima */
-  margin: 5% auto; /* Diminui um pouco a margem superior para aproximar mais do centro da tela */
-  padding: 40px; /* Aumentei ainda mais o padding para mais espaço interno */
-  background: #f8f9fa;
-  border-radius: 15px; /* Aumentei o arredondamento das bordas */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Aumentei a sombra para um destaque mais forte */
+  max-width: 800px;
+  margin: 5% auto;
+  padding: 40px;
+  background: #f9ff81;;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 
 input {
   display: block;
   width: 90%;
-  margin: 20px auto; /* Aumentei a margem entre os campos */
-  padding: 14px; /* Aumentei o padding dos campos */
+  margin: 20px auto;
+  padding: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 button {
-  padding: 12px 20px; /* Aumentei o tamanho do botão */
+  padding: 12px 20px;
   margin: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #ff9100;
   color: white;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #ff9100;
 }
 
 ul {
@@ -38,8 +38,8 @@ ul {
 
 li {
   background: #fff;
-  padding: 14px; /* Aumentei o padding para mais espaço nos itens */
-  margin-top: 12px; /* Aumentei o espaçamento entre os itens */
+  padding: 14px;
+  margin-top: 12px;
   border-radius: 5px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Suavizei um pouco a sombra */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
