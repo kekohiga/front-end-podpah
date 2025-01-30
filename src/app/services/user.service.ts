@@ -16,6 +16,13 @@ export class UserService {
     this.users.next([...this.users.getValue(), newUser]);
   }
 
+  updateUser(id: number, name: string, description: string) {
+    const updatedUsers = this.users.getValue().map(user =>
+      user.id === id ? { ...user, name, description } : user
+    );
+    this.users.next(updatedUsers);
+  }
+
   deleteUser(id: number) {
     this.users.next(this.users.getValue().filter(user => user.id !== id));
   }
