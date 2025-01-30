@@ -10,7 +10,7 @@
 
   <ul>
     <li *ngFor="let user of users$ | async">
-      {{ user.name }} ({{ user.dayOfWeek }}) - {{ user.description }}
+      {{ user.dayOfWeek }} vamos receber {{ user.name }} e vamos falar sobre {{ user.description }}
       <button (click)="editUser(user)">Editar</button>
       <button (click)="deleteUser(user.id)">Deletar</button>
     </li>

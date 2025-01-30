@@ -7,7 +7,7 @@ export class UserService {
   private users = new BehaviorSubject<User[]>([]);
   users$ = this.users.asObservable();
 
-  private daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  private daysOfWeek = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
   private nextId = 1;
 
   addUser(name: string, description: string) {
