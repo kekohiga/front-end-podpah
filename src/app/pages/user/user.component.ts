@@ -15,14 +15,20 @@ export class UserComponent {
   users$ = this.userService.users$;
   name = '';
   description = '';
+  dayOfWeek = '';
   isEditing = false;
   editingUserId: number | null = null;
+
+  daysOfWeek = [
+    'Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira',
+    'Quinta-Feira', 'Sexta-Feira', 'Sábado'
+  ];
 
   constructor(private userService: UserService) {}
 
   addUser() {
-    if (this.name && this.description) {
-      this.userService.addUser(this.name, this.description);
+    if (this.name && this.description && this.dayOfWeek) {
+      this.userService.addUser(this.name, this.description, this.dayOfWeek);
       this.resetForm();
     }
   }
@@ -30,13 +36,14 @@ export class UserComponent {
   editUser(user: User) {
     this.name = user.name;
     this.description = user.description;
+    this.dayOfWeek = user.dayOfWeek;
     this.isEditing = true;
     this.editingUserId = user.id;
   }
 
   saveUser() {
     if (this.isEditing && this.editingUserId !== null) {
-      this.userService.updateUser(this.editingUserId, this.name, this.description);
+      this.userService.updateUser(this.editingUserId, this.name, this.description, this.dayOfWeek);
     } else {
       this.addUser();
     }
@@ -50,6 +57,7 @@ export class UserComponent {
   resetForm() {
     this.name = '';
     this.description = '';
+    this.dayOfWeek = '';
     this.isEditing = false;
     this.editingUserId = null;
   }

@@ -4,13 +4,18 @@
   <input [(ngModel)]="name" placeholder="Nome" />
   <input [(ngModel)]="description" placeholder="Assunto" />
 
+  <select [(ngModel)]="dayOfWeek">
+    <option value="" disabled selected>Selecione o dia da semana</option>
+    <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
+  </select>
+
   <button (click)="saveUser()">
     {{ isEditing ? 'Salvar' : 'Adicionar convidado' }}
   </button>
 
   <ul>
     <li *ngFor="let user of users$ | async">
-      {{ user.dayOfWeek }} vamos receber {{ user.name }} e vamos falar sobre {{ user.description }}
+      <strong>{{ user.dayOfWeek }}</strong>: vamos receber <strong>{{ user.name }}</strong> e falar sobre <strong>{{ user.description }}</strong>
       <button (click)="editUser(user)">Editar</button>
       <button (click)="deleteUser(user.id)">Deletar</button>
     </li>
