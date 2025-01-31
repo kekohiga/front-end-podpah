@@ -12,5 +12,11 @@ html, body {
 }
 
 body {
-    background: #000000;
+  background-image: url('./assets/svg/faixas.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
