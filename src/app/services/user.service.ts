@@ -16,8 +16,8 @@ export class UserService {
   addUser(name: string, description: string, dayOfWeek: string) {
     const usersPerDay = this.users.getValue().filter(user => user.dayOfWeek === dayOfWeek);
 
-    if (usersPerDay.length >= 7) {
-      alert(`O limite de 7 convidados para ${dayOfWeek} foi atingido!`);
+    if (usersPerDay.length >= 1) {
+      alert(`O limite de 1 convidados para ${dayOfWeek} foi atingido!`);
       return;
     }
 
@@ -26,9 +26,20 @@ export class UserService {
   }
 
   updateUser(id: number, name: string, description: string, dayOfWeek: string) {
-    const updatedUsers = this.users.getValue().map(user =>
+    const currentUsers = this.users.getValue();
+
+    // Verifica se já existe outro usuário cadastrado para o mesmo dia da semana
+    const existingUser = currentUsers.find(user => user.dayOfWeek === dayOfWeek && user.id !== id);
+
+    if (existingUser) {
+      alert(`Já existe um convidado cadastrado para ${dayOfWeek}!`);
+      return;
+    }
+
+    const updatedUsers = currentUsers.map(user =>
       user.id === id ? { ...user, name, description, dayOfWeek } : user
     );
+
     this.users.next(updatedUsers);
   }
 
