@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
@@ -8,23 +8,25 @@ import { User } from '../user/user.model';
   selector: 'app-user',
   standalone: true,
   imports: [CommonModule, FormsModule],
+  providers: [UserService], // Garante que o serviço está disponível
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  users$ = this.userService.users$;
+  private userService = inject(UserService);
+  users$ = this.userService.users$; // Usamos users$ no template com o async pipe
   name = '';
   description = '';
   dayOfWeek = '';
   isEditing = false;
-  editingUserId: number | null = null;
+  editingUserId: string | null = null;
 
   daysOfWeek = [
     'Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira',
     'Quinta-Feira', 'Sexta-Feira', 'Sábado'
   ];
 
-  constructor(private userService: UserService) {}
+  constructor() {}
 
   addUser() {
     if (this.name && this.description && this.dayOfWeek) {
@@ -42,7 +44,7 @@ export class UserComponent {
   }
 
   saveUser() {
-    if (this.isEditing && this.editingUserId !== null) {
+    if (this.isEditing && this.editingUserId) {
       this.userService.updateUser(this.editingUserId, this.name, this.description, this.dayOfWeek);
     } else {
       this.addUser();
@@ -50,7 +52,7 @@ export class UserComponent {
     this.resetForm();
   }
 
-  deleteUser(id: number) {
+  deleteUser(id: string) {
     this.userService.deleteUser(id);
   }
 

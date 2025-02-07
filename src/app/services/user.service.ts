@@ -1,49 +1,43 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../../app/pages/user/user.model';
+import { User } from '../pages/user/user.model';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
+  private apiUrl = 'http://localhost:8080/api/guests';
   private users = new BehaviorSubject<User[]>([]);
   users$ = this.users.asObservable();
 
-  private daysOfWeek = [
-    'Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira',
-    'Quinta-Feira', 'Sexta-Feira', 'Sábado'
-  ];
-  private nextId = 1;
+  constructor(private http: HttpClient) {
+    this.loadUsers();
+  }
 
+  /** Carrega a lista de usuários do banco */
+  private loadUsers() {
+    this.http.get<User[]>(this.apiUrl).subscribe(users => this.users.next(users));
+  }
+
+  /** Adiciona um usuário e recarrega a lista */
   addUser(name: string, description: string, dayOfWeek: string) {
-    const usersPerDay = this.users.getValue().filter(user => user.dayOfWeek === dayOfWeek);
-
-    if (usersPerDay.length >= 1) {
-      alert(`O limite de 1 convidados para ${dayOfWeek} foi atingido!`);
-      return;
-    }
-
-    const newUser: User = { id: this.nextId++, name, description, dayOfWeek };
-    this.users.next([...this.users.getValue(), newUser]);
+    this.http.post<User>(this.apiUrl, { name, description, dayOfWeek }).subscribe(() => {
+      this.loadUsers(); // Recarrega os usuários após adicionar
+    });
   }
 
-  updateUser(id: number, name: string, description: string, dayOfWeek: string) {
-    const currentUsers = this.users.getValue();
-
-    // Verifica se já existe outro usuário cadastrado para o mesmo dia da semana
-    const existingUser = currentUsers.find(user => user.dayOfWeek === dayOfWeek && user.id !== id);
-
-    if (existingUser) {
-      alert(`Já existe um convidado cadastrado para ${dayOfWeek}!`);
-      return;
-    }
-
-    const updatedUsers = currentUsers.map(user =>
-      user.id === id ? { ...user, name, description, dayOfWeek } : user
-    );
-
-    this.users.next(updatedUsers);
+  /** Atualiza um usuário e recarrega a lista */
+  updateUser(id: string, name: string, description: string, dayOfWeek: string) {
+    this.http.put<User>(`${this.apiUrl}/${id}`, { name, description, dayOfWeek }).subscribe(() => {
+      this.loadUsers(); // Recarrega os usuários após atualizar
+    });
   }
 
-  deleteUser(id: number) {
-    this.users.next(this.users.getValue().filter(user => user.id !== id));
+  /** Deleta um usuário e recarrega a lista */
+  deleteUser(id: string) {
+    this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => {
+      this.loadUsers(); // Recarrega os usuários após deletar
+    });
   }
 }
