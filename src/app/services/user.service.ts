@@ -24,6 +24,7 @@ export class UserService {
   addUser(name: string, description: string, dayOfWeek: string) {
     this.http.post<User>(this.apiUrl, { name, description, dayOfWeek }).subscribe(() => {
       this.loadUsers(); // Recarrega os usuários após adicionar
+      window.location.reload();
     });
   }
 

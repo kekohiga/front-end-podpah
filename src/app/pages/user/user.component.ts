@@ -31,7 +31,9 @@ export class UserComponent {
   addUser() {
     if (this.name && this.description && this.dayOfWeek) {
       this.userService.addUser(this.name, this.description, this.dayOfWeek);
-      this.resetForm();
+      setTimeout(() => {
+        window.location.reload(); // Recarrega a página após adicionar
+      }, 500);
     }
   }
 
