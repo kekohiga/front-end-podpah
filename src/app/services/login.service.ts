@@ -7,7 +7,7 @@ import { tap } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  apiUrl: string = "http://localhost:8080/auth"
+  apiUrl: string = "http://podpah-tst-env.eba-pbd6u66u.us-east-2.elasticbeanstalk.com/auth"
 
   constructor(private httpClient: HttpClient) { }
 

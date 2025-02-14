@@ -7,7 +7,7 @@ import { User } from '../pages/user/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/api/guests';
+  private apiUrl = 'http://podpah-tst-env.eba-pbd6u66u.us-east-2.elasticbeanstalk.com/api/guests';
   private users = new BehaviorSubject<User[]>([]);
   users$ = this.users.asObservable();
 
